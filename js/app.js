@@ -6,7 +6,17 @@ socialNetwork.constant('baseUrl', 'http://softuni-social-network.azurewebsites.n
 
 socialNetwork.config(function($routeProvider) {
 	$routeProvider
-		.when('#/',{
-			templateUrl:'partials/home-screen.html'
+		.when('#/' ,{
+			templateUrl :'partials/home-screen.html',
+			controller : 'UserController'
 		})
+		.when('#/login' ,{
+			templateUrl :'partials/login-screen.html',
+			controller : 'UserController'	
+		})
+		.when('#/register' ,{
+			templateUrl :'partials/register-screen.html',
+			controller : 'UserController'
+		})
+		.otherwise({redirectTo: '#/'})
 });
