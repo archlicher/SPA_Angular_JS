@@ -1,0 +1,9 @@
+div.jumbotron {
+	width: 400px;
+	margin: 100px auto;
+	text-align: center;
+}
+
+div.jumbotron>h2 {
+	margin: 20px auto;
+}
