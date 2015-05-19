@@ -5,6 +5,8 @@ div.jumbotron {
 }
 
 div.jumbotron>h2 {
+	font-family: 'Kaushan Script', cursive;
+	font-weight: bold;
 	margin: 20px auto;
 }
 
@@ -14,4 +16,12 @@ div.jumbotron>div.form-group>* {
 
 div.jumbotron>div.form-group>a {
 	width: 49%;
+}
+
+div.jumbotron>div.form-group {
+	text-align: left;
+}
+
+div.jumbotron>div.form-group>input.radio-gender {
+	margin: auto 5px auto auto;
 }
