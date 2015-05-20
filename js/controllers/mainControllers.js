@@ -3,11 +3,11 @@
 SocialNetwork.controller('MainController', 
 function($scope, $location, $route, restService, notify) {
 	
-	localStorage['isUserLogged'] = false;
+/*	localStorage['isUserLogged'] = false;
 	localStorage['isUserNotLogged'] = true;
-
-	$scope.isUserNotLogged = restService.isUserNotLogged();
-	$scope.isUserLogged = restService.isUserLogged();
+*/
+	$scope.isUserNotLogged = false;
+	$scope.isUserLogged = true;
 
 	$scope.login = function () {
 		restService.login(loginData,

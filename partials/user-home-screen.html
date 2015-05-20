@@ -1,18 +1,30 @@
-<div class="well row" ng-repeat="post in data.posts">
-	<div>
-		<div>
-			<img src="" alt="">
-			<span><strong>{{post.owner}}</strong></span>
-			<span>{{post.publishedAt | date}}</span>
-		</div>
-		<p>{{post.data}}</p>
-		<!-- like unlike -->
-		<div ng-repeat="comment in data.comments">
-			<img src="" alt="">
-			<span><strong>{{comment.owner}}</strong></span>
-			<span>{{comment.publishedAt | date}}</span>
-			<span>{{comment.content}}</span>
+<div>
+	<div class="col-sm-8 blog-main" id="home">
+		<div class="blog-post" ng-repeat="post in data.posts">
+			<div class="">
+				<img src="" alt="">
+				<span><strong>{{post.owner}}</strong></span>
+				<span>{{post.publishedAt | date}}</span>
+			</div>
+			<p>{{post.content}}</p>
 			<!-- like unlike -->
+			<div ng-repeat="comment in post.comments">
+				<img src="" alt="">
+				<span><strong>{{comment.owner}}</strong></span>
+				<span>{{comment.publishedAt | date}}</span>
+				<span>{{comment.content}}</span>
+				<!-- like unlike -->
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-3 col-sm-offset-1 blog-sidebar" id="side">
+		<div class="sidebar-module sidebar-module-inset">
+			<div>{{friends.count}} Friends</div>
+			<div>
+				<a href="">
+					<img src="" alt="">
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
