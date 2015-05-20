@@ -2,15 +2,22 @@
 
 SocialNetwork.controller('MainController', 
 function($scope, $location, $route, restService, notify) {
+	
+	localStorage['isUserLogged'] = false;
+	localStorage['isUserNotLogged'] = true;
 
-	$scope.isUserNotLogged = true;
-	$scope.isUserLogged = false;
+	$scope.isUserNotLogged = restService.isUserNotLogged();
+	$scope.isUserLogged = restService.isUserLogged();
 
 	$scope.login = function () {
 		restService.login(loginData,
 			function success (serverData) {
 				notify.showInfo('Successfully loged in!');
 				restService.SetUserToStorage(serverData)
+				ClearData();
+			},
+			function error (errorData) {
+				notify.showError('Invalid username or password', errorData);
 			})
 	}
 

@@ -13,7 +13,7 @@ SocialNetwork.config(function($routeProvider) {
 			controller : 'MainController'
 		})
 		.when('/users/:username' ,{
-			templateUrl : 'partials/user-screen.html',
+			templateUrl : 'partials/user-wall-screen.html',
 			controller : 'UserController'
 		})
 		.when('/profile' ,{

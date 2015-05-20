@@ -1,0 +1,18 @@
+<div class="well row" ng-repeat="post in data.posts">
+	<div>
+		<div>
+			<img src="" alt="">
+			<span><strong>{{post.owner}}</strong></span>
+			<span>{{post.publishedAt | date}}</span>
+		</div>
+		<p>{{post.data}}</p>
+		<!-- like unlike -->
+		<div ng-repeat="comment in data.comments">
+			<img src="" alt="">
+			<span><strong>{{comment.owner}}</strong></span>
+			<span>{{comment.publishedAt | date}}</span>
+			<span>{{comment.content}}</span>
+			<!-- like unlike -->
+		</div>
+	</div>
+</div>

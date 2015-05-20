@@ -22,7 +22,11 @@ SocialNetwork.factory('restService', function($http, baseUrl){
     	return 'Bearer'+localStorage['accessToken'];
     }
 
-    service.isUserLogedIn = function () {
+    service.isUserNotLogged = function () {
+    	return	localStorage[isUserLogged] ? !localStorage[isUserLogged] : false;
+    }
+
+    service.isUserLogged = function () {
     	return localStorage['isUserLogged'];
     }
 
