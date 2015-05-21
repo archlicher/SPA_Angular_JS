@@ -10,8 +10,8 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 		userService.login($scope.loginData,
 			function success (serverData) {
 				//notify.showInfo('Successful login.');
-				$location.path('/');
 				userHeaderInfo();
+				$location.path('/');
 			},
 			function error (errorData) {
 				notify.showError('Invalid username or password!', errorData);
@@ -24,6 +24,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			function success() {
 				//notify.showInfo('User registered successfully.');
 				userHeaderInfo();
+				$location.path('/');
 			},
 			function error(errorData) {
 				//notify.showError('User registration failed!', errorData);
