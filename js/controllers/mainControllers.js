@@ -1,23 +1,17 @@
 'use strict';
 
-SocialNetwork.controller('MainController', 
-function($scope, $location, $rootScope, userRestService, notify) {
-	$scope.userRestService = userRestService;
-	$scope.isUserNotLogged = !userRestService.isUserLogged();
-	$scope.isUserLogged = userRestService.isUserLogged();
+SocialNetwork.controller('MainController', function($scope, $location, $rootScope, userService, notify) {
+	$scope.userService = userService;
+	$scope.notify = notify;
+	$scope.isUserNotLogged = !userService.isUserLogged();
+	$scope.isUserLogged = userService.isUserLogged();
 
 	$scope.login = function (loginData) {
-		userRestService.login($scope.loginData,
+		userService.login($scope.loginData,
 			function success (serverData) {
-				notify.showInfo('Successful login.');
-				ClearData();
+				//notify.showInfo('Successful login.');
 				$location.path('/');
-				$scope.user = {};
-				userRestService.getUserPreview(
-					function success (userPreview) {
-					$scope.user.img = userPreview.profileImageData;
-					$scope.user.name = userPreview.name;
-				})
+				userHeaderInfo();
 			},
 			function error (errorData) {
 				notify.showError('Invalid username or password!', errorData);
@@ -25,31 +19,39 @@ function($scope, $location, $rootScope, userRestService, notify) {
 	};
 
 	$scope.register = function (registerData) {
-		userRestService.register(registerData, 
+		console.log(registerData);
+		userService.register(registerData, 
 			function success() {
-				notify.showInfo('User registered successfully.');
-				ClearData();
+				//notify.showInfo('User registered successfully.');
+				userHeaderInfo();
 			},
 			function error(errorData) {
-				notify.showError('User registration failed!', errorData);
+				//notify.showError('User registration failed!', errorData);
 			});
 	};
 
 	$scope.logout = function () {
-		userRestService.logout(
+		$location.path('/logout')
+		userService.logout(
 			function success () {
-				notify.showInfo('Successful logout.')
+				//notify.showInfo('Successful logout.')
 				$location.path('/');
 			}, 
 			function error (errorData) {
-				notify.showError('Faild to logout!', errorData)
+				console.log(errorData);
+				//notify.showError('Faild to logout!', errorData)
 			});
-	}
+	};
 
-	var ClearData = function () {
-		$scope.loginData = '';
-		$scope.registerData = '';
-		$scope.userData = '';
-		$scope.passwordData = '';
-	}
+	var userHeaderInfo = function () {
+		var user = userService.getCurrentUser();
+		$scope.user = {};
+		userService.getUserPreview(user.userName,
+					function success (userPreview) {
+					$scope.user.img = userPreview.profileImageData;
+					$scope.user.name = userPreview.name;
+				}, function error (errorData) {
+					
+				});
+	};
 });

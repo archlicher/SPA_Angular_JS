@@ -46,7 +46,7 @@ SocialNetwork.config(function($routeProvider) {
 		.otherwise({redirectTo: '/'});
 });
 
-SocialNetwork.run(function ($location, $rootScope, restService) {
+SocialNetwork.run(function ($location, $rootScope) {
 	$rootScope.$on('$locationChangeStart', function (event) {
 		if (!sessionStorage['currentUser'] == undefined) {
 			$location.path("/");
