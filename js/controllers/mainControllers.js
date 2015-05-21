@@ -1,25 +1,33 @@
 'use strict';
 
 SocialNetwork.controller('MainController', 
-function($scope, $location, $route, restService, notify) {
-	
-/*	localStorage['isUserLogged'] = false;
-	localStorage['isUserNotLogged'] = true;
-*/
-	$scope.isUserNotLogged = false;
-	$scope.isUserLogged = true;
+function($scope, $location, $rootScope, userRestService, notify) {
+	$scope.userRestService = userRestService;
+	$scope.isUserNotLogged = !userRestService.isUserLogged();
+	$scope.isUserLogged = userRestService.isUserLogged();
 
-	$scope.login = function () {
-		restService.login(loginData,
+	$scope.login = function (loginData) {
+		userRestService.login($scope.loginData,
 			function success (serverData) {
-				notify.showInfo('Successfully loged in!');
-				restService.SetUserToStorage(serverData)
+				notify.showInfo('Successful login.');
 				ClearData();
+				$location.path('/');
 			},
 			function error (errorData) {
-				notify.showError('Invalid username or password', errorData);
+				notify.showError('Invalid username or password!', errorData);
 			})
-	}
+	};
+
+	$scope.register = function (registerData) {
+		userRestService.register(registerData, 
+			function success() {
+				notify.showInfo("User registered successfully");
+				ClearData();
+			},
+			function error(errorData) {
+				notify.showError("User registration failed");
+			});
+	};
 
 	var ClearData = function () {
 		$scope.loginData = '';
@@ -27,5 +35,4 @@ function($scope, $location, $route, restService, notify) {
 		$scope.userData = '';
 		$scope.passwordData = '';
 	}
-
 });

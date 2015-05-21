@@ -1,34 +1,54 @@
 'use strict';
 
-SocialNetwork.factory('restService', function($http, baseUrl){
-	var service = {};
+SocialNetwork.factory('userRestService', function ($http, baseUrl){
+	return {
+        login : function (loginData, success, error) {
+            var request = {
+                method : 'POST',
+                url : baseUrl+'/users/login',
+                data : loginData
+            };
+            $http(request).success(function (data) {
+                sessionStorage['currentUser'] = JSON.stringify(data);
+                success(data);
+            }).error(error);
+        },
 
-	var serviceUrl = baseUrl + '/user';
+        register : function (registerData, success, error) {
+            var request = {
+                method : 'POST',
+                url : baseUrl+'/users/register',
+                data : registerData
+            };
+            $http(request).success(function (data) {
+                sessionStorage['currentUser'] = JSON.stringify(data);
+                success(data);
+            }).error(error);
+        },
 
-	service.Login = function (loginData, success, error) {
-		$http.post(serviceUrl+'/login', loginData)
-			.success(function (data, status, headers, config) {
-				success(data);
-			}).error(error);
-	}
+        logout : function () {
+            delete sessionStorage['currentUser'];
+        },
 
-	service.SetUserToStorage = function (serverData) {
-        localStorage['accessToken'] = serverData.access_token;
-        localStorage['username'] = serverData.userName;
-        localStorage['isUserLogged'] = true;
+        getCurrentUser : function() {
+            var user = sessionStorage['currentUser'];
+            if (user) {
+                return JSON.parse(sessionStorage['currentUser']);
+            }
+        },
+
+        isUserLogged : function() {
+            var currentUser = this.getCurrentUser();
+            return currentUser!= undefined;
+        },
+
+        getHeaders : function() {
+            var headers = {};
+            var currentUser = this.getCurrentUser();
+            if (currentUser) {
+                headers['Authorization'] = 'Bearer' + currentUser.access_token;
+            }
+            return headers;
+        }
     };
-
-    service.GetHeaders = function () {
-    	return 'Bearer'+localStorage['accessToken'];
-    }
-
-    service.isUserNotLogged = function () {
-    	return	localStorage[isUserLogged] ? !localStorage[isUserLogged] : false;
-    }
-
-    service.isUserLogged = function () {
-    	return localStorage['isUserLogged'];
-    }
-
-	return service;
 });

@@ -1,10 +1,10 @@
-<div class="jumbotron">
+<div class="jumbotron" ng-controller="MainController">
 	<h2>the social network</h2>
 	<h3>Log in:</h3>
 	<div class="form-group">
-		<input type="text" placeholder="Username" class="form-control" ng-model="loginData.username">
-		<input type="password" placeholder="Password" class="form-control" ng-model="loginData.password">		
-		<a href="#/" class="btn btn-primary active" role="button">Login</a>
+		<input type="text" placeholder="Username" class="form-control" ng-model="loginData.username" required/>
+		<input type="password" placeholder="Password" class="form-control" ng-model="loginData.password" required/>		
+		<a class="btn btn-primary active" role="button" ng-click="login(loginData)">Login</a>
 		<a href="#/register" class="btn btn-warning active" role="button">Register</a>
 	</div>
 </div>
