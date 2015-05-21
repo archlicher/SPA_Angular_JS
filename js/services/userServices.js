@@ -27,7 +27,44 @@ SocialNetwork.factory('userRestService', function ($http, baseUrl){
         },
 
         logout : function () {
-            delete sessionStorage['currentUser'];
+            var request = {
+                method : 'POST',
+                url : baseUrl+'users/logout'
+            };
+            $http(request).success(function () {
+                delete sessionStorage['currentUser'];
+            }).error(error);
+        },
+
+        editProfile : function (profileData, success, error) {
+            var request = {
+                method : 'PUT',
+                url : baseUrl + 'me',
+                data : profileData
+            };
+            $http(request).success(function (data) {
+                success(data);
+            }).error(error);
+        },
+
+        getUserPreview : function (success, error) {
+            var request = {
+                method : 'GET',
+                url : baseUrl + sessionStorage['currentUser'].username + '/preview';
+            };
+            $http(request).success(function (data) {
+                success(data);
+            }).error(error);
+        },
+
+        getUserData : function (success, error) {
+            var request = {
+                method : 'GET',
+                url : baseUrl + sessionStorage['currentUser'].username
+            };
+            $http(request).success(function (data) {
+                success(data);
+            }).error(error);
         },
 
         getCurrentUser : function() {
