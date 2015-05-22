@@ -1,0 +1,84 @@
+'use strict';
+
+SocialNetwork.factory('commentService', function ($http, baseUrl){
+	return {
+		addCommentToPost : function (data, headers, success, error) {
+			var request = {
+				method : 'POST',
+                headers : headers,
+                url : baseUrl + 'posts/' + data.postId + '/comments',
+                data : data.commentContent
+			};
+			$http(request).success(function (data) {
+				success(data);
+			}).error(error);
+		},
+
+		editComment : function (data, headers, success, error) {
+			var request = {
+				method : 'PUT',
+                headers : headers,
+                url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId,
+                data : data.commentContent
+			};
+			$http(request).success(function (data) {
+				success(data);
+			}).error(error);
+		},
+
+		deleteComment : function (data, headers, success, error) {
+			var request = {
+				method : 'DELETE',
+                headers : headers,
+                url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId
+			};
+			$http(request).success(function (data) {
+				success(data);
+			}).error(error);
+		},
+
+		getCommentDetailedLikes : function (data, headers, success, error) {
+			var request = {
+				method : 'GET',
+                headers : headers,
+                url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes'
+			};
+			$http(request).success(function (data) {
+				success(data);
+			}).error(error);
+		},
+
+		getCommentLikes : function (data, headers, success, error) {
+			var request = {
+				method : 'GET',
+                headers : headers,
+                url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes/preview'
+			};
+			$http(request).success(function (data) {
+				success(data);
+			}).error(error);
+		},
+
+		likeComment : function (data, headers, success, error) {
+			var request = {
+				method : 'POST',
+                headers : headers,
+                url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes'
+			};
+			$http(request).success(function (data) {
+				success(data);
+			}).error(error);
+		},
+
+		unlikeComment : function (data, headers, success, error) {
+			var request = {
+				method : 'DELETE',
+                headers : headers,
+                url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes'
+			};
+			$http(request).success(function (data) {
+				success(data);
+			}).error(error);
+		}
+	}
+});

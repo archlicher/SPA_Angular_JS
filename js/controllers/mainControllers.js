@@ -1,44 +1,43 @@
 'use strict';
 
-SocialNetwork.controller('MainController', function($scope, $location, $rootScope, userService, notify) {
+SocialNetwork.controller('MainController', function($scope, $location, $rootScope, userService, friendService, postService, commentService, notifyService) {
 	$scope.userService = userService;
-	$scope.notify = notify;
+	$scope.notifyService = notifyService;
 	$scope.isUserNotLogged = !userService.isUserLogged();
 	$scope.isUserLogged = userService.isUserLogged();
 
 	$scope.login = function (loginData) {
 		userService.login($scope.loginData,
 			function success (serverData) {
-				//notify.showInfo('Successful login.');
+				notifyService.showInfo('Successful login.');
 				userHeaderInfo();
 				$location.path('/');
 			},
 			function error (errorData) {
-				notify.showError('Invalid username or password!', errorData);
+				notifyService.showError('Invalid username or password!', errorData);
 			});
 	};
 
 	$scope.register = function (registerData) {
 		userService.register(registerData, 
 			function success() {
-				//notify.showInfo('User registered successfully.');
+				notifyService.showInfo('User registered successfully.');
 				userHeaderInfo();
 				$location.path('/');
 			},
 			function error(errorData) {
-				//notify.showError('User registration failed!', errorData);
+				notifyService.showError('User registration failed!', errorData);
 			});
 	};
 
 	$scope.logout = function () {
 		userService.logout(
 			function success () {
-				//notify.showInfo('Successful logout.')
+				notifyService.showInfo('Successful logout.')
 				location.reload();
 			}, 
 			function error (errorData) {
-				console.log(errorData);
-				//notify.showError('Faild to logout!', errorData)
+				notifyService.showError('Failed to logout!', errorData)
 			});
 	};
 
@@ -61,23 +60,22 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 		var user = userService.getCurrentUser();
 		$scope.user = {};
 		userService.getUserPreview(user.userName,
-					function success (userPreview) {
-					$scope.user.img = sessionStorage['userData'].profileImageData;
-					$scope.user.name = sessionStorage['userData'].name;
-					$scope.user.pendingRequest = sessionStorage['userData'].hasPendingRequest;
-					if (sessionStorage['userData'].hasPendingRequest) {
-						userService.getFriendRequest(
-							function success () {
-								var requests = userService.pendingRequests();
-								$scope.user.requests = userService.pendingRequests();
-								$scope.user.requestCount = requests.length;
-							},
-							function error (data) {
-								// body...
-							})
-					}
-				}, function error (errorData) {
-					
-				});
+				function success (userPreview) {
+				$scope.user.img = sessionStorage['userData'].profileImageData;
+				$scope.user.name = sessionStorage['userData'].name;
+				$scope.user.pendingRequest = sessionStorage['userData'].hasPendingRequest;
+				if (sessionStorage['userData'].hasPendingRequest) {
+					userService.getFriendRequest(
+						function success () {
+							var requests = userService.pendingRequests();
+							$scope.user.requests = userService.pendingRequests();
+							$scope.user.requestCount = requests.length;
+						},
+						function error (data) {
+							
+						});
+				}
+			}, function error (errorData) {	
+		});
 	};
 });

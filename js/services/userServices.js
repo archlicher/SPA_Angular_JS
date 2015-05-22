@@ -51,14 +51,14 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             }).error(error);
         },
 
-        getUserPreview : function (username, success, error) {
+        changePassword : function (password, success, error) {
             var request = {
-                method : 'GET',
+                method : 'PUT',
+                url : baseUrl + 'me/changepassword',
                 headers : this.getHeaders(),
-                url : baseUrl + 'users/' + username + '/preview'
+                data : password
             };
             $http(request).success(function (data) {
-                sessionStorage['userData'] = JSON.stringify(data);
                 success(data);
             }).error(error);
         },
@@ -75,6 +75,18 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             }).error(error);
         },
 
+        getMyFriends : function (success, error) {
+            var request = {
+                method : 'GET',
+                headers : this.getHeaders(),
+                url : baseUrl + 'me/friends'
+            };
+            $http(request).success(function (data) {
+                sessionStorage['myFriends'] = JSON.stringify(data);
+                success(data);
+            }).error(error);
+        },
+
         getFriendRequest : function (success, error) {
             var request = {
                 method : 'GET',
@@ -87,11 +99,79 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             }).error(error);
         },
 
-        getUserData : function (username, success, error) {
+        sendFriendRequest : function (user, success, error) {
+            var request = {
+                method : 'POST',
+                headers : this.getHeaders(),
+                url : baseUrl + 'me/requests/' + user
+            };
+            $http(request).success(function (data) {
+                success();
+            }).error(error);
+        },
+
+        aproveFriendRequest : function (requestId, success, error) {
+            var request = {
+                method : 'PUT',
+                headers : this.getHeaders(),
+                url : baseUrl + 'me/requests/' + requestId + '?status=approved'
+            };
+            $http(request).success(function (data) {
+                success();
+            }).error(error);
+        },
+
+        rejectFriendRequest : function (requestId, success, error) {
+            var request = {
+                method : 'PUT',
+                headers : this.getHeaders(),
+                url : baseUrl + 'me/requests/' + requestId + '?status=rejected'
+            };
+            $http(request).success(function (data) {
+                success();
+            }).error(error);
+        },
+
+        getUserPreview : function (username, success, error) { //for posts of friends param 'username' is user to get
+            var request = {
+                method : 'GET',
+                headers : this.getHeaders(),
+                url : baseUrl + 'users/' + username + '/preview'
+            };
+            $http(request).success(function (data) {
+                sessionStorage['userData'] = JSON.stringify(data);
+                success(data);
+            }).error(error);
+        },
+
+        searchUsersByName : function (name, success, error) {
+            var request = {
+                method : 'GET',
+                headers : this.getHeaders(),
+                url : baseUrl + 'users/search?searchTerm=' + name
+            };
+            $http(request).success(function (data) {
+                sessionStorage['usersByName'] = JSON.stringify(data);
+                success(data);
+            }).error(error);  
+        },
+
+        getUserData : function (username, success, error) { // for friend's home page param 'username' is user to get
             var request = {
                 method : 'GET',
                 headers : this.getHeaders(),
                 url : baseUrl + username
+            };
+            $http(request).success(function (data) {
+                success(data);
+            }).error(error);
+        },
+
+        getNewsFeed : function (pageSize, success, error) { //newsfeed for pagiantion
+            var request = {
+                method : 'GET',
+                headers : this.getHeaders(),
+                url : baseUrl + 'me/feed?StartPostId=&PageSize=' + pageSize
             };
             $http(request).success(function (data) {
                 success(data);
