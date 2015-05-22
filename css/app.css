@@ -58,3 +58,7 @@ div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA {
 div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA>span {
 	vertical-align: text-bottom;
 }
+
+span.error {
+	color: red;
+}
