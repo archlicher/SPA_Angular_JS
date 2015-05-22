@@ -14,24 +14,24 @@
                 <ul class="nav navbar-nav">
                     <li id="userLi">
                         <a href="/user/:username" id="userA">
-                            <div><img ng-src="{{user.img}}" alt="profile picture" class="img"></div>
+                            <div><img ng-src="{{user.img}}" alt="profile picture" title="profile pic" class="img"></div>
                             <div><span>{{user.name}}</span></div>
                         </a>
                     </li>
                     <li>
-                        <a href="#/" class="btn btn-default user-btn"><img src="img/news-feed.png" alt="news feed" class="img"></a>
+                        <a href="#/" class="btn btn-default user-btn"><img src="img/news-feed.png" title="news feed" alt="news feed" class="img"></a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-default user-btn"><img src="img/pending-requests.png" alt="pending requests" class="img"></a>
+                        <a href="" class="btn btn-default user-btn"><img src="img/pending-requests.png" title="pending friend requests" alt="pending requests" class="img"><span class="badge" ng-if="user.hasPendingRequest">{{user.requestCount}}</span></a>
                     </li>
                     <li>
-                        <a href="#/profile" class="btn btn-default user-btn"><img src="img/edit-profile.png" alt="edit profile" class="img"></a>
+                        <a href="#/profile" class="btn btn-default user-btn"><img src="img/edit-profile.png" title="edit profile" alt="edit profile" class="img"></a>
                     </li>
                     <li>
-                        <a href="#/profile/password" class="btn btn-default user-btn"><img src="img/change-password.png" alt="change password" class="img"></a>
+                        <a href="#/profile/password" class="btn btn-default user-btn"><img src="img/change-password.png" title="change password" alt="change password" class="img"></a>
                     </li>
                     <li>
-                        <a href="#/logout" class="btn btn-default user-btn" ng-click="logout()"><img src="img/logout.png" alt="logout" class="img">
+                        <a href="#/logout" class="btn btn-default user-btn" ng-click="logout()"><img src="img/logout.png" title="logout" alt="logout" class="img">
                     </a>
                     </li>
                 </ul>

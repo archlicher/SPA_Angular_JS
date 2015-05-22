@@ -4,17 +4,31 @@ div.jumbotron {
 	text-align: center;
 }
 
+body>div>div.panel {
+	width: 600px;
+	margin: 100px auto;
+}
+
+body>div>div.panel>form.form-group>div.panel>a.btn {
+	width : 100px;
+	margin-left: 15px;
+}
+
 div.jumbotron>h2 {
 	font-family: 'Kaushan Script', cursive;
 	font-weight: bold;
 	margin: 20px auto;
 }
 
+div.jumbotron>h2>a {
+	text-decoration: none;
+}
+
 div.jumbotron>div.form-group>* {
 	margin: 5px auto;
 }
 
-div.jumbotron>div.form-group>a {
+div.jumbotron>form.form-group>a {
 	width: 49%;
 }
 

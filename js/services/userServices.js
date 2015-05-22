@@ -63,6 +63,30 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             }).error(error);
         },
 
+        getMyWallData : function (success, error) {
+            var request = {
+                method : 'GET',
+                headers : this.getHeaders(),
+                url : baseUrl + 'me'
+            };
+            $http(request).success(function (data) {
+                sessionStorage['myWallData'] = JSON.stringify(data);
+                success(data);
+            }).error(error);
+        },
+
+        getFriendRequest : function (success, error) {
+            var request = {
+                method : 'GET',
+                headers : this.getHeaders(),
+                url : baseUrl + 'me/requests'
+            };
+            $http(request).success(function (data) {
+                sessionStorage['friendRequests'] = JSON.stringify(data);
+                success();
+            }).error(error);
+        },
+
         getUserData : function (username, success, error) {
             var request = {
                 method : 'GET',
@@ -78,6 +102,13 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             var user = sessionStorage['currentUser'];
             if (user) {
                 return JSON.parse(sessionStorage['currentUser']);
+            }
+        },
+
+        pendingRequests : function  (argument) {
+            var pendRequests = sessionStorage['friendRequests'];
+            if (pendRequests) {
+                return JSON.parse(sessionStorage['friendRequests']);
             }
         },
 

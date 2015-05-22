@@ -1,5 +1,5 @@
 <div class="jumbotron">
-	<h2>the social network</h2>
+	<h2><a href="#/">the social network</a></h2>
 	<h3>Type in details to register</h3>
 	<form name="regForm" class="form-group" ng-controller="MainController">
 		<label for="username">Username:</label><span role="alert" class="error" ng-show="regForm.user.$error.required">*</span>
@@ -12,9 +12,9 @@
 		<label for="passwordRe">Confirm password:</label><span role="alert" class="error" ng-show="regForm.passRe.$error.required">*</span>
 		<input type="password" id="passwordRe" name="passRe" class="form-control" ng-model="registerData.confirmPassword" required>
 		<label for="name">Name:</label><span role="alert" class="error" ng-show="regForm.name.$error.required">*</span>
-		<input type="text" id="name"  name="name" class="form-control" ng-model="registerData.name" required>
+		<input type="text" id="name" name="name" class="form-control" ng-model="registerData.name" required>
 		<label for="mail">E-mail:</label><span role="alert" class="error" ng-show="regForm.mail.$error.required">*</span>
-		<input type="e-mail" id="mail"  name="mail" class="form-control" ng-model="registerData.email" required>
+		<input type="e-mail" id="mail" name="mail" class="form-control" ng-model="registerData.email" required>
 		<label for="gender">Gender:</label>
 		<input type="radio" class="radio-gender" name="gender" ng-model="registerData.gender" id="male" value="Male"><label for="male">Male</label>
 		<input type="radio" class="radio-gender" name="gender" ng-model="registerData.gender" id="female" value="Female"><label for="female">Female</label>
