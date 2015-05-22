@@ -35,6 +35,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             $http(request).success(function () {
                 delete sessionStorage['currentUser'];
                 delete sessionStorage['userData'];
+                success();
             }).error(error);
         },
 

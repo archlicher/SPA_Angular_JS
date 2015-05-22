@@ -14,8 +14,8 @@
                 <ul class="nav navbar-nav">
                     <li id="userLi">
                         <a href="/user/:username" id="userA">
-                            <img ng-src="{{user.img}}" alt="profile picture" class="img">
-                            <span>{{user.name}}</span>
+                            <div><img ng-src="{{user.img}}" alt="profile picture" class="img"></div>
+                            <div><span>{{user.name}}</span></div>
                         </a>
                     </li>
                     <li>
@@ -31,7 +31,7 @@
                         <a href="#/profile/password" class="btn btn-default user-btn"><img src="img/change-password.png" alt="change password" class="img"></a>
                     </li>
                     <li>
-                        <a class="btn btn-default user-btn" ng-click="logout()"><img src="img/logout.png" alt="logout" class="img">
+                        <a href="#/logout" class="btn btn-default user-btn" ng-click="logout()"><img src="img/logout.png" alt="logout" class="img">
                     </a>
                     </li>
                 </ul>

@@ -15,11 +15,10 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			},
 			function error (errorData) {
 				notify.showError('Invalid username or password!', errorData);
-			})
+			});
 	};
 
 	$scope.register = function (registerData) {
-		console.log(registerData);
 		userService.register(registerData, 
 			function success() {
 				//notify.showInfo('User registered successfully.');
@@ -32,11 +31,10 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 	};
 
 	$scope.logout = function () {
-		$location.path('/logout')
 		userService.logout(
 			function success () {
 				//notify.showInfo('Successful logout.')
-				$location.path('/');
+				location.reload();
 			}, 
 			function error (errorData) {
 				console.log(errorData);
