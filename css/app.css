@@ -9,9 +9,10 @@ body>div>div.panel {
 	margin: 100px auto;
 }
 
-body>div>div.panel>form.form-group>a.btn {
-	width : 100px;
+body>div>div.panel>form.form-group>div>a.btn {
+	width : 150px;
 	margin-left: 15px;
+	margin-bottom: 10px;
 }
 
 div.jumbotron>h2 {

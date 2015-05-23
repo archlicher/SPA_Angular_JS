@@ -6,7 +6,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 	$scope.isUserNotLogged = !userService.isUserLogged();
 	$scope.isUserLogged = userService.isUserLogged();
 	$scope.updateProfile = {name:null, email:null, profileImageData:null, coverImageData:null, gender:null};
-	$scope.post = {postContent:null, username:sessionStorage['myWallData'].username};
+	$scope.post = {postContent:null, username:null};
 	$scope.comment = {commentContent:null};
 
 	$scope.login = function (loginData) {
@@ -41,9 +41,20 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 				$location.path('/');
 			},
 			function error (errorData) {
-				notifyService.showError('Unsuccessfull profile edit!', errorData);
-			})
-	}
+				notifyService.showError('Unsuccessful profile edit!', errorData);
+			});
+	};
+
+	$scope.changePassword = function (changePass) {
+		userService.changePassword(changePass, 
+			function success () {
+				notifyService.showInfo('Successfully changed password.');
+				$location.path('/');
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to change password!', errorData);
+			});
+	};
 
 	$scope.logout = function () {
 		userService.logout(
@@ -64,11 +75,11 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			var reader = new FileReader();
 			reader.onload = function() {
 				$scope.updateProfile.profileImageData = reader.result;
-				$(".image-box").html("<img src='" + reader.result + "'>");
+				$("#profile-box").html("<img src='" + reader.result + "'>");
 			};
 			reader.readAsDataURL(file);
 		} else {
-			$(".image-box").html("<p>File type not supported!</p>");
+			$("#profile-box").html("<p>File type not supported!</p>");
 		}
 	};
 
@@ -79,11 +90,11 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			var reader = new FileReader();
 			reader.onload = function() {
 				$scope.updateProfile.coverImageData = reader.result;
-				$(".image-box").html("<img src='" + reader.result + "'>");
+				$("#cover-box").html("<img src='" + reader.result + "'>");
 			};
 			reader.readAsDataURL(file);
 		} else {
-			$(".image-box").html("<p>File type not supported!</p>");
+			$("#cover-box").html("<p>File type not supported!</p>");
 		}
 	};
 
