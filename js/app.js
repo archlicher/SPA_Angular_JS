@@ -20,35 +20,36 @@ SocialNetwork.config(function($routeProvider) {
 		})
 		.when('/users/:username' ,{
 			templateUrl : 'partials/user-wall-screen.html',
-			controller : 'UserController'
+			controller : 'MainController'
 		})
 		.when('/profile' ,{
 			templateUrl : 'partials/edit-profile-screen.html',
-			controller : 'UserController'
+			controller : 'MainController'
 		})
 		.when('/profile/password' ,{
 			templateUrl : 'partials/edit-password-screen.html',
-			controller : 'UserController'
+			controller : 'MainController'
 		})
 		.when('/logout' ,{
 			templateUrl : 'partials/logout-screen.html',
-			controller : 'UserController',
+			controller : 'MainController',
 			redirectTo : '/'	
 		})
 		.when('#/users/:username/friends' ,{
 			templateUrl : 'partials/friend-screen.html',
-			controller : 'FriendController'
+			controller : 'MainController'
 		})
 		.when('#/users/:username/:post', {
 			templateUrl : 'partials/edit-post-screen.html',
-			controller : 'PostController'
+			controller : 'MainController'
 		})
 		.otherwise({redirectTo: '/'});
 });
 
 SocialNetwork.run(function ($location, $rootScope) {
 	$rootScope.$on('$locationChangeStart', function (event) {
-		if (!sessionStorage['currentUser'] == undefined) {
+		var url = $location.path()
+		if (sessionStorage['currentUser'] == undefined && url != '/login' && url != '/register') {
 			$location.path("/");
 		}
 	});
