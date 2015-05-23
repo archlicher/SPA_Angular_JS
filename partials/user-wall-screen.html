@@ -1,8 +1,8 @@
 <div ng-include="'partials/header.html'"></div>
-<div class="container" id="userWallView">
+<div class="container" id="myFriendsPage">
 	<div class="page-header">
-		<img src="{{userService.getMyWallFromStorage().coverImageData}}" alt="cover picture" id="coverPhoto">
-		<img src="{{userService.getMyWallFromStorage().profileImageData}}" alt="profile picture" id="profilePhoto">
+		<img ng-src="{{userService.getMyWallFromStorage().coverImageData}}" alt="cover picture" id="coverPhoto">
+		<img ng-src="{{userService.getMyWallFromStorage().profileImageData}}" alt="profile picture" id="profilePhoto">
 		<span>{{userService.getMyWallFromStorage().name}}</span>
 	</div>
 	<div class="panel panel-success">
@@ -10,7 +10,7 @@
 		<div class="panel-body">
 			<ul class="friends">
 				<li class="friend" ng-repeat="friend in userService.getMyFriendsFromStorage()">
-					<div ng-click="goToUserWall()" id="{{friend.username}}">
+					<div ng-click="goToUserWall(friend.username)" id="{{friend.username}}">
 						<img ng-src="{{friend.profileImageData}}" alt="friendImg"><span>{{friend.name}}</span>
 					</div>
 				</li>

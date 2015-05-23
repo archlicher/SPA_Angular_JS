@@ -13,7 +13,7 @@
             <form class="navbar-form navbar-left">
                 <ul class="nav navbar-nav">
                     <li id="userLi">
-                        <a href="" id="userA" ng-click="userWallPage()" title="view friends">
+                        <a href="" id="userA" ng-click="myFriendsPage()" title="view friends">
                             <div>
                                 <img ng-src="{{userService.getMyWallFromStorage().profileImageData}}" alt="profile picture" title="profile pic" class="img">
                                 <span>{{userService.getMyWallFromStorage().name}}</span>
@@ -24,7 +24,10 @@
                         <a href="#/" class="btn btn-default user-btn"><img src="img/news-feed.png" title="news feed" alt="news feed" class="img"></a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-default user-btn"><img src="img/pending-requests.png" title="pending friend requests" alt="pending requests" class="img"><span class="badge" ng-if="requests">{{userService.getMyFriendRequests().length}}</span></a>
+                        <a href="" class="btn btn-default user-btn" ng-click="showRequests = true"><img src="img/pending-requests.png" title="pending friend requests" alt="pending requests" class="img"><span class="badge" ng-if="userService.hasFriendRequest()">{{userService.getMyFriendRequests().length}}</span></a>
+                        <ul ng-if="showRequests">
+                            <li><a href="" ng-click="approveRequest()">yes</a><a href="" ng-click="rejectRequest()">no</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#/profile" class="btn btn-default user-btn"><img src="img/edit-profile.png" title="edit profile" alt="edit profile" class="img"></a>

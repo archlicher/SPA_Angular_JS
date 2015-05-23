@@ -167,17 +167,19 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
                 url : baseUrl + username
             };
             $http(request).success(function (data) {
-                success(data);
+                sessionStorage['userData'] = JSON.stringify(data);
+                success();
             }).error(error);
         },
 
-        getNewsFeed : function (pageSize, success, error) { //newsfeed for pagiantion
+        getNewsFeed : function (pageSize, success, error) { //newsfeed for pagination
             var request = {
                 method : 'GET',
                 headers : this.getHeaders(),
                 url : baseUrl + 'me/feed?StartPostId=&PageSize=' + pageSize
             };
             $http(request).success(function (data) {
+                sessionStorage['newsfeed'] = JSON.stringify(data);
                 success(data);
             }).error(error);
         },
@@ -192,15 +194,23 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
         getMyWallFromStorage : function () {
             var wall = sessionStorage['myWallData'];
             if (wall) {
-                return JSON.parse(sessionStorage['myWallData'])
+                return JSON.parse(sessionStorage['myWallData']);
             }
         },
 
         getMyFriendRequests : function () {
             var requests = sessionStorage['friendRequests'];
             if (requests) {
-                return JSON.parse(sessionStorage['friendRequests'])
+                return JSON.parse(sessionStorage['friendRequests']);
             }
+        },
+
+        hasFriendRequest : function () {
+            var requests = sessionStorage['friendRequests'];
+            if (requests) {
+                return true;
+            }
+            return false;
         },
 
         getMyFriendsFromStorage : function () {
@@ -210,10 +220,17 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             }
         },
 
-        getUserData : function () {
+        getUserFromStorage : function () {
             var user = sessionStorage['userData'];
             if (user) {
                 return JSON.parse(sessionStorage['userData']);
+            }
+        },
+
+        getNewsfeedFromStorage : function () {
+            var news = sessionStorage['newsfeed'];
+            if (news) {
+                return JSON.parse(sessionStorage['newsfeed']);
             }
         },
 

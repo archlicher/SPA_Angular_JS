@@ -17,6 +17,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			function success (serverData) {
 				notifyService.showInfo('Successful login.');
 				$scope.userHeaderInfo();
+				$scope.getNewsFeed();
 				$location.path('/');
 			},
 			function error (errorData) {
@@ -29,6 +30,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			function success() {
 				notifyService.showInfo('User registered successfully.');
 				$scope.userHeaderInfo();
+				$scope.getNewsFeed();
 				$location.path('/');
 			},
 			function error(errorData) {
@@ -119,15 +121,39 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			function error (errorData) {
 				notifyService.showError('Failed to connect to server!',errorData)
 			});
+		$scope.myfriends = userService.getMyFriends();
 	};
 
-	$scope.userWallPage = function () {
-		var username = userService.getMyWallFromStorage().username;
-		$scope.myfriends = userService.getMyFriends();
+	$scope.myFriendsPage = function () {
 		$location.path('/friends');
 	};
 
+	$scope.goToUserWall = function (username) {
+		userService.getUserData(username, 
+			function success () {
+				var usernameUrl = userService.getUserFromStorage().username;
+				$location.path('/users/' + usernameUrl);
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to load user:', errorData)
+			})
+	};
+
+	$scope.approveRequest = function () {
+		$scope.showRequests = false;
+	};
+
+	$scope.rejectRequest = function () {
+		$scope.showRequests = false;
+	};
+
 	$scope.getNewsFeed = function () {
-		
+		userService.getNewsFeed(5, 
+			function success (data) {
+				$scope.newsfeed = userService.getNewsfeedFromStorage();
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to connect to server:', errorData);
+			})
 	};
 });

@@ -83,7 +83,7 @@ span.error {
 	color: red;
 }
 
-body>div>div#userWallView {
+body>div>div#myFriendsPage {
 	width: 80%;
 	margin: 0 auto;
 }
@@ -124,4 +124,8 @@ ul.friends>li.friend>div {
 
 ul.friends>li.friend>div:hover {
 	cursor: pointer;
+}
+
+div>div.blog-post>div.panel-heading>a>img {
+	max-width:40px;
 }

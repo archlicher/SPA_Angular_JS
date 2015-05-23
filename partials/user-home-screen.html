@@ -1,28 +1,32 @@
 <div>
 	<div class="col-sm-8 blog-main" id="home">
-		<div class="blog-post" ng-repeat="post in data.posts">
-			<div class="">
-				<img src="" alt="">
-				<span><strong>{{post.owner}}</strong></span>
-				<span>{{post.publishedAt | date}}</span>
+		<div class="blog-post panel panel-primary" ng-repeat="post in userService.getNewsfeedFromStorage()">
+			<div class="panel-heading">
+				<a href="" ng-click="goToUserWall(post.author.username)" style="color:white; text-decoration:none;">
+				<img ng-src="{{post.author.profileImageData}}" alt=""><span><strong>{{post.author.name}}</strong></span></a><span>></span><a href="" ng-click="goToUserWall(post.wallOwner.username)" style="color:white; text-decoration:none;"><span><strong>{{post.wallOwner.name}}</strong></span></a>
+				<span>{{post.date | date}}</span>
 			</div>
-			<p>{{post.content}}</p>
+			<div class="panel-body">
+			<p>{{post.postContent}}</p>
+			</div>
 			<!-- like unlike -->
-			<div ng-repeat="comment in post.comments">
-				<img src="" alt="">
-				<span><strong>{{comment.owner}}</strong></span>
-				<span>{{comment.publishedAt | date}}</span>
-				<span>{{comment.content}}</span>
+			<div class="panel-info" ng-repeat="comment in post.comments">
+				<div class="panel-heading">
+					<img ng-src="comment.author.profileImageData" alt="">
+					<a href="" ng-click="goToUserWall(comment.author.username)"><span><strong>{{comment.author.name}}</strong></span></a> commented
+					<span>on {{comment.date | date}}</span>
+				</div>
+				<p class="panel-body">{{comment.commentContent}}</p>
 				<!-- like unlike -->
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-3 col-sm-offset-1 blog-sidebar" id="side">
-		<div class="sidebar-module sidebar-module-inset">
-			<div>{{friends.count}} Friends</div>
-			<div>
-				<a href="">
-					<img src="" alt="">
+		<div class="sidebar-module sidebar-module-inset panel panel-info">
+			<div class="panel-heading">{{userService.getMyFriendsFromStorage().length}} Friends</div>
+			<div class="panel-body" ng-repeat="friend in userService.getMyFriendsFromStorage()">
+				<a href="" ng-click="goToUserWall(friend.username)">
+					<img ng-src="{{friend.profileImageData}}" alt="friendImg"><span>{{friend.name}}</span>
 				</a>
 			</div>
 		</div>

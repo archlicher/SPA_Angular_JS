@@ -1,0 +1,20 @@
+<div ng-include="'partials/header.html'"></div>
+<div class="container" id="userFriendsPage">
+	<div class="page-header">
+		<img ng-src="{{userService.getUserFromStorage().coverImageData}}" alt="cover picture" id="coverPhoto">
+		<img ng-src="{{userService.getUserFromStorage().profileImageData}}" alt="profile picture" id="profilePhoto">
+		<span>{{userService.getUserFromStorage().name}}</span>
+	</div>
+	<div class="panel panel-success">
+		<div class="panel-heading">Friends</div>
+		<div class="panel-body">
+			<ul class="friends">
+				<li class="friend" ng-repeat="friend in userService.getMyFriendsFromStorage()">
+					<div ng-click="goToUserWall(friend.username)" id="{{friend.username}}">
+						<img ng-src="{{friend.profileImageData}}" alt="friendImg"><span>{{friend.name}}</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
