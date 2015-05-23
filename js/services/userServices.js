@@ -37,6 +37,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
                 delete sessionStorage['userData'];
                 delete sessionStorage['myWallData'];
                 delete sessionStorage['friendRequests'];
+                delete sessionStorage['myFriends'];
                 success();
             }).error(error);
         },
@@ -49,7 +50,6 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
                 data : profileData
             };
             $http(request).success(function (data) {
-                delete sessionStorage['userData'];
                 delete sessionStorage['myWallData'];
                 delete sessionStorage['friendRequests'];
                 success();
@@ -80,7 +80,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             }).error(error);
         },
 
-        getMyFriends : function (success, error) {
+        getMyFriends : function () {
             var request = {
                 method : 'GET',
                 headers : this.getHeaders(),
@@ -88,8 +88,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             };
             $http(request).success(function (data) {
                 sessionStorage['myFriends'] = JSON.stringify(data);
-                success(data);
-            }).error(error);
+            }).error();
         },
 
         getFriendRequest : function (success, error) {
@@ -201,6 +200,13 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             var requests = sessionStorage['friendRequests'];
             if (requests) {
                 return JSON.parse(sessionStorage['friendRequests'])
+            }
+        },
+
+        getMyFriendsFromStorage : function () {
+            var friedns = sessionStorage['myFriends'];
+            if (friedns) {
+                return JSON.parse(sessionStorage['myFriends'])
             }
         },
 

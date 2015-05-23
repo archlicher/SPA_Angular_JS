@@ -2,6 +2,9 @@
 
 SocialNetwork.controller('MainController', function($scope, $location, $rootScope, userService, friendService, postService, commentService, notifyService) {
 	$scope.userService = userService;
+	$scope.friendService = friendService;
+	$scope.postService = postService;
+	$scope.commentService = commentService;
 	$scope.notifyService = notifyService;
 	$scope.isUserNotLogged = !userService.isUserLogged();
 	$scope.isUserLogged = userService.isUserLogged();
@@ -17,7 +20,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 				$location.path('/');
 			},
 			function error (errorData) {
-				notifyService.showError('Invalid username or password!', errorData);
+				notifyService.showError('Failed to log in', errorData);
 			});
 	};
 
@@ -102,6 +105,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 		userService.getMyWallData(
 			function success () {
 				$scope.me = userService.getMyWallFromStorage();
+				$scope.posts = null;
 			},
 			function error (errorData) {
 				notifyService.showError('Failed to connect to server!',errorData)
@@ -117,7 +121,13 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			});
 	};
 
+	$scope.userWallPage = function () {
+		var username = userService.getMyWallFromStorage().username;
+		$scope.myfriends = userService.getMyFriends();
+		$location.path('/friends');
+	};
+
 	$scope.getNewsFeed = function () {
 		
-	}
+	};
 });

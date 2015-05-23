@@ -18,8 +18,12 @@ SocialNetwork.config(function($routeProvider) {
 			templateUrl :'partials/register-screen.html',
 			controller : 'MainController'
 		})
-		.when('/users/:username' ,{
+		.when('/friends' ,{
 			templateUrl : 'partials/user-wall-screen.html',
+			controller : 'MainController'
+		})
+		.when('/users/:username' ,{
+			templateUrl : 'partials/friend-screen.html',
 			controller : 'MainController'
 		})
 		.when('/profile' ,{

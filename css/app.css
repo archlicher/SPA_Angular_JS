@@ -82,3 +82,46 @@ div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA>div>img {
 span.error {
 	color: red;
 }
+
+body>div>div#userWallView {
+	width: 80%;
+	margin: 0 auto;
+}
+
+div.container>div.page-header>img#coverPhoto {
+	width: 100%;
+	height: 200px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -999;
+}
+
+div.container>div.page-header>img#profilePhoto,
+div.container>div.page-header>span, 
+div.container>div.page-header>a  {
+	margin: 50px 0 0 20px;
+	vertical-align: bottom;
+	font-size: 3em;
+}
+
+ul.friends {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: center;
+}
+
+li.friend {
+	display: inline-block;
+}
+
+ul.friends>li.friend>div {
+	margin-right: 10px;
+	padding: 5px;
+	border:1px solid #3c763d;
+}
+
+ul.friends>li.friend>div:hover {
+	cursor: pointer;
+}
