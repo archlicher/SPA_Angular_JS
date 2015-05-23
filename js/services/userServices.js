@@ -49,7 +49,10 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
                 data : profileData
             };
             $http(request).success(function (data) {
-                success(data);
+                delete sessionStorage['userData'];
+                delete sessionStorage['myWallData'];
+                delete sessionStorage['friendRequests'];
+                success();
             }).error(error);
         },
 

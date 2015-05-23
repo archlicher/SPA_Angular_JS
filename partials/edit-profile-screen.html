@@ -4,24 +4,30 @@
 		<div class="panel">
 			<div class="panel-body" name="updateForm">
 			  	<label for="image">Profile picture:</label>
-			  	<input type="file" id="image" onchange="angular.element(this).scope().fileSelected(this)"/>
-			  	<!--How does this shit works???-->
+			  	<input type="file" id="image" onchange="angular.element(this).scope().fileSelectedProfileImage(this)"/>
+			  	<div class="image-box"></div>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="panel-body" name="updateForm">
+			  	<label for="coverImage">Cover photo:</label>
+			  	<input type="file" id="coverImage" onchange="angular.element(this).scope().fileSelectedCoverPhoto(this)"/>
 			  	<div class="image-box"></div>
 			</div>
 		</div>
 		<div class="panel">
 			<div class="panel-body">
 				<label for="name">Name:</label><span role="alert" class="error" ng-show="updateForm.name.$error.required">*</span>
-				<input type="text" id="name" name="name" class="form-control" ng-model="update.name" required>
+				<input type="text" id="name" name="name" class="form-control" ng-model="updateProfile.name" placeholder="" required>
 				<label for="mail">E-mail:</label><span role="alert" class="error" ng-show="updateForm.mail.$error.required">*</span>
-				<input type="e-mail" id="mail" name="mail" class="form-control" ng-model="update.email" required>
+				<input type="e-mail" id="mail" name="mail" class="form-control" ng-model="updateProfile.email" required>
 				<label for="gender">Gender:</label>
-				<input type="radio" class="radio-gender" name="gender" ng-model="update.gender" id="male" value="Male"><label for="male">Male</label>
-				<input type="radio" class="radio-gender" name="gender" ng-model="update.gender" id="female" value="Female"><label for="female">Female</label>
-				<input type="radio" class="radio-gender" name="gender" ng-model="update.gender" id="other" value="Other"><label for="other">Other</label>
+				<input type="radio" class="radio-gender" name="gender" ng-model="updateProfile.gender" id="male" value="Male"><label for="male">Male</label>
+				<input type="radio" class="radio-gender" name="gender" ng-model="updateProfile.gender" id="female" value="Female"><label for="female">Female</label>
+				<input type="radio" class="radio-gender" name="gender" ng-model="updateProfile.gender" id="other" value="Other"><label for="other">Other</label>
 			</div>
 		</div>
-		<a class="btn btn-warning active" role="button" ng-click="editProfile(update)">Edit profile</a>
+		<a class="btn btn-warning active" role="button" ng-click="editProfile(updateProfile)">Edit profile</a>
 		<a href="#/" class="btn btn-primary active" role="button">Cancel</a>
 	</form>
 </div>

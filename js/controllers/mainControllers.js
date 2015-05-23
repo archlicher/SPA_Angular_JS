@@ -5,6 +5,9 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 	$scope.notifyService = notifyService;
 	$scope.isUserNotLogged = !userService.isUserLogged();
 	$scope.isUserLogged = userService.isUserLogged();
+	$scope.updateProfile = {name:null, email:null, profileImageData:null, coverImageData:null, gender:null};
+	$scope.post = {postContent:null, username:sessionStorage['myWallData'].username};
+	$scope.comment = {commentContent:null};
 
 	$scope.login = function (loginData) {
 		userService.login($scope.loginData,
@@ -30,6 +33,18 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			});
 	};
 
+	$scope.editProfile = function (updateProfile) {
+		userService.editProfile(updateProfile,
+			function success () {
+				$scope.userHeaderInfo();
+				notifyService.showInfo('Successful profile edit.');
+				$location.path('/');
+			},
+			function error (errorData) {
+				notifyService.showError('Unsuccessfull profile edit!', errorData);
+			})
+	}
+
 	$scope.logout = function () {
 		userService.logout(
 			function success () {
@@ -42,13 +57,28 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			});
 	};
 
-	$scope.fileSelected = function(fileInputField) {
-		delete $scope.adData.imageDataUrl;
+	$scope.fileSelectedProfileImage = function(fileInputField) {
+		delete $scope.updateProfile.profileImageData;
 		var file = fileInputField.files[0];
 		if (file.type.match(/image\/.*/)) {
 			var reader = new FileReader();
 			reader.onload = function() {
-				$scope.adData.imageDataUrl = reader.result;
+				$scope.updateProfile.profileImageData = reader.result;
+				$(".image-box").html("<img src='" + reader.result + "'>");
+			};
+			reader.readAsDataURL(file);
+		} else {
+			$(".image-box").html("<p>File type not supported!</p>");
+		}
+	};
+
+	$scope.fileSelectedCoverPhoto = function(fileInputField) {
+		delete $scope.updateProfile.coverImageData;
+		var file = fileInputField.files[0];
+		if (file.type.match(/image\/.*/)) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				$scope.updateProfile.coverImageData = reader.result;
 				$(".image-box").html("<img src='" + reader.result + "'>");
 			};
 			reader.readAsDataURL(file);
@@ -75,4 +105,8 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 				notifyService.showError('Failed to connect to server!',errorData)
 			});
 	};
+
+	$scope.getNewsFeed = function () {
+		
+	}
 });

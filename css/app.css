@@ -9,7 +9,7 @@ body>div>div.panel {
 	margin: 100px auto;
 }
 
-body>div>div.panel>form.form-group>div.panel>a.btn {
+body>div>div.panel>form.form-group>a.btn {
 	width : 100px;
 	margin-left: 15px;
 }
@@ -69,8 +69,13 @@ div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA {
 	font-size: 1.5em;
 }
 
-div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA>span {
+div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA>div {
+	margin: auto 5px;
 	vertical-align: text-bottom;
+}
+
+div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA>div>img {
+	max-width: 35px;
 }
 
 span.error {
