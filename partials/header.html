@@ -10,19 +10,21 @@
             <a class="navbar-brand" href="#/">the social network</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-left" ng-controller="MainController">
+            <form class="navbar-form navbar-left">
                 <ul class="nav navbar-nav">
                     <li id="userLi">
                         <a href="/user/:username" id="userA">
-                            <div><img ng-src="{{user.img}}" alt="profile picture" title="profile pic" class="img"></div>
-                            <div><span>{{user.name}}</span></div>
+                            <div>
+                                <img ng-src="{{userService.getMyWallFromStorage().profileImageData}}" alt="profile picture" title="profile pic" class="img">
+                                <span>{{userService.getMyWallFromStorage().name}}</span>
+                            </div>
                         </a>
                     </li>
                     <li>
                         <a href="#/" class="btn btn-default user-btn"><img src="img/news-feed.png" title="news feed" alt="news feed" class="img"></a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-default user-btn"><img src="img/pending-requests.png" title="pending friend requests" alt="pending requests" class="img"><span class="badge" ng-if="user.hasPendingRequest">{{user.requestCount}}</span></a>
+                        <a href="" class="btn btn-default user-btn"><img src="img/pending-requests.png" title="pending friend requests" alt="pending requests" class="img"><span class="badge" ng-if="requests">{{userService.getMyFriendRequests().length}}</span></a>
                     </li>
                     <li>
                         <a href="#/profile" class="btn btn-default user-btn"><img src="img/edit-profile.png" title="edit profile" alt="edit profile" class="img"></a>
@@ -40,7 +42,7 @@
                 <ul class="nav navbar-nav">
                     <li>    
                         <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control">
+                            <input type="text" placeholder="Name" class="form-control">
                             <a type="submit" class="btn btn-success img"><img src="img/search.png" alt="search"></a>
                         </div>
                     </li>

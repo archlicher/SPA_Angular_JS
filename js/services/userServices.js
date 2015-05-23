@@ -35,6 +35,8 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             $http(request).success(function () {
                 delete sessionStorage['currentUser'];
                 delete sessionStorage['userData'];
+                delete sessionStorage['myWallData'];
+                delete sessionStorage['friendRequests'];
                 success();
             }).error(error);
         },
@@ -71,7 +73,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             };
             $http(request).success(function (data) {
                 sessionStorage['myWallData'] = JSON.stringify(data);
-                success(data);
+                success();
             }).error(error);
         },
 
@@ -95,7 +97,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             };
             $http(request).success(function (data) {
                 sessionStorage['friendRequests'] = JSON.stringify(data);
-                success();
+                success(data);
             }).error(error);
         },
 
@@ -178,17 +180,24 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             }).error(error);
         },
 
-        getCurrentUser : function() {
+        getCurrentUser : function () {
             var user = sessionStorage['currentUser'];
             if (user) {
                 return JSON.parse(sessionStorage['currentUser']);
             }
         },
 
-        pendingRequests : function  (argument) {
-            var pendRequests = sessionStorage['friendRequests'];
-            if (pendRequests) {
-                return JSON.parse(sessionStorage['friendRequests']);
+        getMyWallFromStorage : function () {
+            var wall = sessionStorage['myWallData'];
+            if (wall) {
+                return JSON.parse(sessionStorage['myWallData'])
+            }
+        },
+
+        getMyFriendRequests : function () {
+            var requests = sessionStorage['friendRequests'];
+            if (requests) {
+                return JSON.parse(sessionStorage['friendRequests'])
             }
         },
 

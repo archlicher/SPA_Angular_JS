@@ -10,7 +10,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 		userService.login($scope.loginData,
 			function success (serverData) {
 				notifyService.showInfo('Successful login.');
-				userHeaderInfo();
+				$scope.userHeaderInfo();
 				$location.path('/');
 			},
 			function error (errorData) {
@@ -22,7 +22,7 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 		userService.register(registerData, 
 			function success() {
 				notifyService.showInfo('User registered successfully.');
-				userHeaderInfo();
+				$scope.userHeaderInfo();
 				$location.path('/');
 			},
 			function error(errorData) {
@@ -37,7 +37,8 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 				$location.path('/');
 			}, 
 			function error (errorData) {
-				notifyService.showError('Failed to logout!', errorData)
+				notifyService.showError('Failed to logout!', errorData);
+				$location.path('/');
 			});
 	};
 
@@ -56,26 +57,22 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 		}
 	};
 
-	var userHeaderInfo = function () {
-		var user = userService.getCurrentUser();
-		$scope.user = {};
-		userService.getUserPreview(user.userName,
-				function success (userPreview) {
-				$scope.user.img = sessionStorage['userData'].profileImageData;
-				$scope.user.name = sessionStorage['userData'].name;
-				$scope.user.pendingRequest = sessionStorage['userData'].hasPendingRequest;
-				if (sessionStorage['userData'].hasPendingRequest) {
-					userService.getFriendRequest(
-						function success () {
-							var requests = userService.pendingRequests();
-							$scope.user.requests = userService.pendingRequests();
-							$scope.user.requestCount = requests.length;
-						},
-						function error (data) {
-							
-						});
+	$scope.userHeaderInfo = function () {
+		userService.getMyWallData(
+			function success () {
+				$scope.me = userService.getMyWallFromStorage();
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to connect to server!',errorData)
+			});
+		userService.getFriendRequest(
+			function success (requests) {
+				if(requests.length != 0) {
+					$scope.requests = userService.getMyFriendRequests();
 				}
-			}, function error (errorData) {	
-		});
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to connect to server!',errorData)
+			});
 	};
 });
