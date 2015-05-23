@@ -32,8 +32,7 @@ SocialNetwork.config(function($routeProvider) {
 		})
 		.when('/logout' ,{
 			templateUrl : 'partials/logout-screen.html',
-			controller : 'MainController',
-			redirectTo : '/'	
+			controller : 'MainController'
 		})
 		.when('#/users/:username/friends' ,{
 			templateUrl : 'partials/friend-screen.html',

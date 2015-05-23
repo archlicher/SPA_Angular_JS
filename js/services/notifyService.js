@@ -6,8 +6,9 @@ SocialNetwork.factory('notifyService',
             showInfo: function(msg) {
                 noty({
                     text: msg,
-                    type: 'info',
+                    type: 'success',
                     layout: 'topCenter',
+                    theme: 'relax',
                     timeout: 1000}
                 );
             },
@@ -35,6 +36,7 @@ SocialNetwork.factory('notifyService',
                     text: msg,
                     type: 'error',
                     layout: 'topCenter',
+                    theme: 'relax',
                     timeout: 5000}
                 );
             }

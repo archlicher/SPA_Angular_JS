@@ -33,8 +33,8 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 	$scope.logout = function () {
 		userService.logout(
 			function success () {
-				notifyService.showInfo('Successful logout.')
-				location.reload();
+				notifyService.showInfo('Successful logout.');
+				$location.path('/');
 			}, 
 			function error (errorData) {
 				notifyService.showError('Failed to logout!', errorData)
