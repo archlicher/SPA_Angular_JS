@@ -238,9 +238,9 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
         },
 
         getFoundUsers : function () {
-            var users = sessionStorage['foundUsers'];
+            var users = sessionStorage['usersByName'];
             if (users) {
-                return JSON.parse(sessionStorage['foundUsers']);
+                return JSON.parse(sessionStorage['usersByName']);
             }
         },
 

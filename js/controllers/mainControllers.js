@@ -131,6 +131,7 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 	$scope.goToUserWall = function (username) {
 		userService.getUserData(username, 
 			function success () {
+				delete sessionStorage['usersByName'];
 				if (userService.getUserFromStorage().isFriend)
 				friendService.getFriendsDetailFriendsList(userService.getUserFromStorage().username, userService.getHeaders(), 
 					function error (errorData) {
@@ -147,7 +148,7 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 	$scope.sendFriendRequest = function (username) {
 		userService.sendFriendRequest(username, 
 			function success () {
-				notifyService.showInfo('Successfully send friend request.');
+				notifyService.showInfo('Successfully sent friend request.');
 			},
 			function error (errorData) {
 				notifyService.showError('Failed to send friend request:', errorData);
