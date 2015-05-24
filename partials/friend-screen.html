@@ -22,12 +22,10 @@
 					<span> Likes: {{post.likesCount}} </span>
 					<a href="#/" ng-if="!post.liked" ng-click="likePost(post.id)">Like</a>
 					<a href="#/" ng-if="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
-					<div ng-controller="VisualController">
-						<button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed">Comment</button>
-						<div ng-if="isCollapsed" style="padding:5px;">
-							<input type="text" ng-model="text">
-							<a class="btn btn-xs btn-info" ng-click="addComment(post.id, text)" style="cursor:pointer;">Comment</a>
-						</div>
+					<button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed">Comment</button>
+					<div style="padding:5px;">
+						<input type="text" ng-model="text">
+						<a class="btn btn-xs btn-info" ng-click="addComment(post.id, text)" style="cursor:pointer;">Comment</a>
 					</div>
 				</div>
 			</div>

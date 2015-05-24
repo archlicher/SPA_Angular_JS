@@ -237,6 +237,13 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             return currentUser!= undefined;
         },
 
+        getFoundUsers : function () {
+            var users = sessionStorage['foundUsers'];
+            if (users) {
+                return JSON.parse(sessionStorage['foundUsers']);
+            }
+        },
+
         getHeaders : function() {
             var headers = {};
             var currentUser = this.getCurrentUser();

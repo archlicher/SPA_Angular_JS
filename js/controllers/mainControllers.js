@@ -181,7 +181,7 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 	};
 
 	$scope.getNewsFeed = function () {
-		userService.getNewsFeed(5, 
+		userService.getNewsFeed(10, 
 			function success (data) {
 				$scope.newsfeed = userService.getNewsfeedFromStorage();
 			},
@@ -207,6 +207,32 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 			});	
 	};
 
+	$scope.searchForUser = function (name) {
+		userService.searchUsersByName(name,
+			function success () {
+				
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to connect to server:', errorData);
+			})
+	}
+
+	$scope.editPost = function (postId) {
+		// body...
+	};
+
+	$scope.deletePost = function (postId) {
+		postService.deletePost(postId, userService.getHeaders(),
+			function success () {
+				notifyService.showInfo('Post deleted.');
+				$scope.getNewsFeed();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to delete post:', errorData);
+			});
+	};
+
 	$scope.addComment = function (postId, commentContent) {
 		var data = {};
 		data.postId = postId;
@@ -220,6 +246,26 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 			function error (errorData) {
 				notifyService.showError('Failed to add comment:', errorData);
 			})
+	};
+
+
+	$scope.editComment = function (postId, commentId) {
+		// body...
+	};
+
+	$scope.deleteComment = function (postId, commentId) {
+		var data = {};
+		data.postId = postId;
+		data.commentId = commentId;
+		commentService.deleteComment(data, userService.getHeaders(),
+			function success () {
+				notifyService.showInfo('Comment deleted.');
+				$scope.getNewsFeed();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to delete comment:', errorData);
+			});
 	};
 
 	$scope.likePost = function (postId) {
