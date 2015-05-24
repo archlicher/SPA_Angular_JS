@@ -145,6 +145,7 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 				notifyService.showInfo('You have a new friend.');
 				userService.getMyFriends();
 				userService.getFriendRequest();
+				location.reload();
 				$location.path('/')
 			}, function error (errorData) {
 				notifyService.showError('Failed to approve friend request:', errorData);
@@ -157,6 +158,7 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 				notifyService.showInfo('You rejected a friend request.');
 				userService.getMyFriends();
 				userService.getFriendRequest();
+				location.reload();
 				$location.path('/')
 			}, function error (errorData) {
 				notifyService.showError('Failed to rejected friend request:', errorData);
@@ -172,4 +174,81 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 				notifyService.showError('Failed to connect to server:', errorData);
 			})
 	};
+
+	$scope.addPost = function (postContent) {
+		var data = {}
+		data.postContent = postContent;
+		data.username = userService.getMyWallFromStorage().username;
+		console.log(data);
+		postService.addPost(data, userService.getHeaders(),
+			function success () {
+				notifyService.showInfo('Added a new post.');
+				$scope.getNewsFeed();
+				location.reload();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to add new post:', errorData);
+			});	
+	};
+
+	$scope.addComment = function (postId, commentContent) {
+		var data = {};
+		data.postId = postId;
+		data.commentContent = commentContent;
+		commentService.addCommentToPost(data, userService.getHeaders(),
+			function success () {
+				notifyService.showInfo('Added a comment.');
+				$scope.getNewsFeed();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to add comment:', errorData);
+			})
+	};
+
+	$scope.likePost = function (postId) {
+		postService.likePost(postId, userService.getHeaders(),
+			function success () {
+				$scope.getNewsFeed();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to like post:', errorData);
+			})
+	};
+
+	$scope.unlikePost = function (postId) {
+		postService.unlikePost(postId, userService.getHeaders(),
+			function success () {
+				$scope.getNewsFeed();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to unlike post:', errorData);
+			})
+	};
+
+	$scope.likeComment = function (commentId) {
+		commentService.likeComment(commentId, userService.getHeaders(),
+			function success () {
+				$scope.getNewsFeed();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to like comment:', errorData);
+			})
+	};
+
+	$scope.unlikeComment = function (commentId) {
+		commentService.unlikeComment(commentId, userService.getHeaders(),
+			function success () {
+				$scope.getNewsFeed();
+				$location.path('/')
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to unlike comment:', errorData);
+			})
+	};
+
 });

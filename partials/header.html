@@ -13,7 +13,7 @@
             <form class="navbar-form navbar-left">
                 <ul class="nav navbar-nav">
                     <li id="userLi">
-                        <a href="" id="userA" ng-click="myFriendsPage()" title="view friends">
+                        <a id="userA" ng-click="myFriendsPage()" title="view friends" style="cursor:pointer;">
                             <div>
                                 <img ng-src="{{userService.getMyWallFromStorage().profileImageData}}" alt="profile picture" title="profile pic" class="img">
                                 <span>{{userService.getMyWallFromStorage().name}}</span>
@@ -30,11 +30,11 @@
                                 <div>
                                     <div>
                                         <img ng-src="{{request.user.profileImageData}}" alt="">
-                                        <a href="" class="link-user" ng-click="goToUserWall(request.user.username)">{{request.user.name}}</a>
+                                        <a class="link-user" ng-click="goToUserWall(request.user.username)">{{request.user.name}}</a>
                                     </div>
                                     <div>
-                                        <a href="" class="btn btn-xs btn-info" ng-click="approveRequest(request.id)">approve</a> 
-                                        <a href="" class="btn btn-xs btn-danger" ng-click="rejectRequest(request.id)">reject</a>
+                                        <a class="btn btn-xs btn-info" ng-click="approveRequest(request.id)">approve</a> 
+                                        <a class="btn btn-xs btn-danger" ng-click="rejectRequest(request.id)">reject</a>
                                     </div>
                                 </div>
                             </li>
@@ -57,7 +57,7 @@
                     <li>    
                         <div class="form-group dropdown">
                             <input type="text" placeholder="Name" class="form-control dropdown-toggle" data-toggle="dropdown" role="button" area-expanded="false" ng-change="searchForUser(name)" ng-model="name">
-                            <a type="submit" class="btn btn-success img"><img src="img/search.png" alt="search" on-click></a>
+                            <a type="submit" class="btn btn-success img"><img src="img/search.png" alt="search" ng-click></a>
                             <div class="dropdown-menu" role="menu">
                                 <ul>
                                     <li ng-repeat="user in userService.getFoundUsers()">

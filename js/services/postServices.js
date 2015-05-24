@@ -21,7 +21,7 @@ SocialNetwork.factory('postService', function ($http, baseUrl){
                 data : postData
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -32,7 +32,7 @@ SocialNetwork.factory('postService', function ($http, baseUrl){
                 url : baseUrl + 'Posts/'+ postId
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -43,7 +43,7 @@ SocialNetwork.factory('postService', function ($http, baseUrl){
                 url : baseUrl + 'Posts/' + postId + '/likes'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -54,7 +54,7 @@ SocialNetwork.factory('postService', function ($http, baseUrl){
                 url : baseUrl + 'Posts/' + postId + '/likes/preview'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -65,7 +65,7 @@ SocialNetwork.factory('postService', function ($http, baseUrl){
                 url : baseUrl + 'Posts/' + postId + '/likes'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -76,7 +76,7 @@ SocialNetwork.factory('postService', function ($http, baseUrl){
                 url : baseUrl + 'Posts/' + postId + '/likes'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -87,7 +87,7 @@ SocialNetwork.factory('postService', function ($http, baseUrl){
                 url : baseUrl + 'posts/' + postId + '/comments'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		}
 	}

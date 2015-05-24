@@ -10,6 +10,7 @@
 		<span role="alert" class="error" ng-show="regForm.pass.$error.maxlength">*</span>
 		<input type="password" id="password" name="pass" class="form-control" ng-model="registerData.password" required ng-minlength="6" ng-maxlength="100">
 		<label for="passwordRe">Confirm password:</label><span role="alert" class="error" ng-show="regForm.passRe.$error.required">*</span>
+		<span role="alert" class="error" ng-show="registerData.password != registerData.confirmPassword">*</span>
 		<input type="password" id="passwordRe" name="passRe" class="form-control" ng-model="registerData.confirmPassword" required>
 		<label for="name">Name:</label><span role="alert" class="error" ng-show="regForm.name.$error.required">*</span>
 		<input type="text" id="name" name="name" class="form-control" ng-model="registerData.name" required>

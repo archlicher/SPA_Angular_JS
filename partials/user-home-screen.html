@@ -2,26 +2,53 @@
 	<div class="col-sm-8 blog-main" id="home">
 		<div class="blog-post panel panel-primary" ng-repeat="post in userService.getNewsfeedFromStorage()">
 			<div class="panel-heading">
-				<a href="" ng-click="goToUserWall(post.author.username)" style="color:white; text-decoration:none;">
+				<a ng-click="goToUserWall(post.author.username)" style="color:white; text-decoration:none;">
 				<img ng-src="{{post.author.profileImageData}}" alt=""><span><strong> {{post.author.name}} </strong></span></a><span>></span><a href="" ng-click="goToUserWall(post.wallOwner.username)" style="color:white; text-decoration:none;"><span><strong> {{post.wallOwner.name}}</strong></span></a>
 				<span>{{post.date | date}}</span>
+				<a class="btn btn-xs btn-warning" ng-if="post.author.username == userService.getCurrentUser().username">Edit</a>
+				<a ng-if="post.author.username == userService.getCurrentUser().username"  class="btn btn-xs btn-danger">Delete</a>
 			</div>
 			<div class="panel-body">
-			<p>{{post.postContent}}</p>
+				<p>{{post.postContent}}</p>
+				<div style="text-align:right;">
+					<span> Likes: {{post.likesCount}} </span>
+					<a href="#/" ng-if="!post.liked" ng-click="likePost(post.id)">Like</a>
+					<a href="#/" ng-if="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
+					<div ng-controller="VisualController">
+						<button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed">Comment</button>
+						<div ng-if="isCollapsed" style="padding:5px;">
+							<input type="text" ng-model="text">
+							<a class="btn btn-xs btn-info" ng-click="addComment(post.id, text)">Comment</a>
+						</div>
+					</div>
+				</div>
 			</div>
-			<!-- like unlike -->
 			<div class="panel-info" ng-repeat="comment in post.comments">
 				<div class="panel-heading">
 					<img ng-src="{{comment.author.profileImageData}}" alt="">
-					<a href="" ng-click="goToUserWall(comment.author.username)"><span><strong> {{comment.author.name}} </strong></span></a> commented
+					<a ng-click="goToUserWall(comment.author.username)"><span><strong> {{comment.author.name}} </strong></span></a> commented
 					<span>on {{comment.date | date}}</span>
+					<a ng-if="comment.author.username == userService.getCurrentUser().username" class="btn btn-xs btn-warning">Edit</a>
+					<a ng-if="comment.author.username == userService.getCurrentUser().username" class="btn btn-xs btn-danger">Delete</a>
 				</div>
-				<p class="panel-body">{{comment.commentContent}}</p>
-				<!-- like unlike -->
+				<div class="panel-body">{{comment.commentContent}}</div>
+				<div style="text-align:right; margin: 0 5px 5px 0;">
+					<span> Likes: {{comment.likesCount}} </span>
+					<a href="#/" ng-if="!comment.liked" ng-click="likeComment(comment.id)">Like</a>
+					<a href="#/" ng-if="comment.liked" ng-click="unlikeComment(comment.id)">Unlike</a>
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-3 col-sm-offset-1 blog-sidebar" id="side">
+	<div class="col-sm-4 blog-sidebar" id="side">
+		<div class="sidebar-module sidebar-module-inset panel panel-success">
+			<div class="panel-heading">Add new post</div>
+			<div class="panel-body">
+				<input type="text" role="button" ng-model="postContent">
+				<a ng-click="addPost(postContent)" class="btn btn-xs btn-success">Post</a>
+			</div>
+		</div>
 		<div class="sidebar-module sidebar-module-inset panel panel-info">
 			<div class="panel-heading">{{userService.getMyFriendsFromStorage().length}} Friends</div>
 			<div class="panel-body" ng-repeat="friend in userService.getMyFriendsFromStorage()">

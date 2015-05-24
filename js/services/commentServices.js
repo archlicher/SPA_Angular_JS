@@ -10,7 +10,7 @@ SocialNetwork.factory('commentService', function ($http, baseUrl){
                 data : data.commentContent
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -22,7 +22,7 @@ SocialNetwork.factory('commentService', function ($http, baseUrl){
                 data : data.commentContent
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -33,7 +33,7 @@ SocialNetwork.factory('commentService', function ($http, baseUrl){
                 url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -44,7 +44,7 @@ SocialNetwork.factory('commentService', function ($http, baseUrl){
                 url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -55,7 +55,7 @@ SocialNetwork.factory('commentService', function ($http, baseUrl){
                 url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes/preview'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -66,7 +66,7 @@ SocialNetwork.factory('commentService', function ($http, baseUrl){
                 url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		},
 
@@ -77,7 +77,7 @@ SocialNetwork.factory('commentService', function ($http, baseUrl){
                 url : baseUrl + 'posts/' + data.postId + '/comments/' + data.commentId + '/likes'
 			};
 			$http(request).success(function (data) {
-				success(data);
+				success();
 			}).error(error);
 		}
 	}
