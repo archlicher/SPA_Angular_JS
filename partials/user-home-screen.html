@@ -3,7 +3,7 @@
 		<div class="blog-post panel panel-primary" ng-repeat="post in userService.getNewsfeedFromStorage()">
 			<div class="panel-heading">
 				<a href="" ng-click="goToUserWall(post.author.username)" style="color:white; text-decoration:none;">
-				<img ng-src="{{post.author.profileImageData}}" alt=""><span><strong>{{post.author.name}}</strong></span></a><span>></span><a href="" ng-click="goToUserWall(post.wallOwner.username)" style="color:white; text-decoration:none;"><span><strong>{{post.wallOwner.name}}</strong></span></a>
+				<img ng-src="{{post.author.profileImageData}}" alt=""><span><strong> {{post.author.name}} </strong></span></a><span>></span><a href="" ng-click="goToUserWall(post.wallOwner.username)" style="color:white; text-decoration:none;"><span><strong> {{post.wallOwner.name}}</strong></span></a>
 				<span>{{post.date | date}}</span>
 			</div>
 			<div class="panel-body">
@@ -12,8 +12,8 @@
 			<!-- like unlike -->
 			<div class="panel-info" ng-repeat="comment in post.comments">
 				<div class="panel-heading">
-					<img ng-src="comment.author.profileImageData" alt="">
-					<a href="" ng-click="goToUserWall(comment.author.username)"><span><strong>{{comment.author.name}}</strong></span></a> commented
+					<img ng-src="{{comment.author.profileImageData}}" alt="">
+					<a href="" ng-click="goToUserWall(comment.author.username)"><span><strong> {{comment.author.name}} </strong></span></a> commented
 					<span>on {{comment.date | date}}</span>
 				</div>
 				<p class="panel-body">{{comment.commentContent}}</p>

@@ -1,6 +1,6 @@
 'use strict';
 
-SocialNetwork.controller('MainController', function($scope, $location, $rootScope, userService, friendService, postService, commentService, notifyService) {
+SocialNetwork.controller('MainController', function($scope, $route, $location, $rootScope, userService, friendService, postService, commentService, notifyService) {
 	$scope.userService = userService;
 	$scope.friendService = friendService;
 	$scope.postService = postService;
@@ -139,12 +139,28 @@ SocialNetwork.controller('MainController', function($scope, $location, $rootScop
 			})
 	};
 
-	$scope.approveRequest = function () {
-		$scope.showRequests = false;
+	$scope.approveRequest = function (requestId) {
+		userService.aproveFriendRequest(requestId, 
+			function success () {
+				notifyService.showInfo('You have a new friend.');
+				userService.getMyFriends();
+				userService.getFriendRequest();
+				$location.path('/')
+			}, function error (errorData) {
+				notifyService.showError('Failed to approve friend request:', errorData);
+			})
 	};
 
-	$scope.rejectRequest = function () {
-		$scope.showRequests = false;
+	$scope.rejectRequest = function (requestId) {
+		userService.rejectFriendRequest(requestId, 
+			function success () {
+				notifyService.showInfo('You rejected a friend request.');
+				userService.getMyFriends();
+				userService.getFriendRequest();
+				$location.path('/')
+			}, function error (errorData) {
+				notifyService.showError('Failed to rejected friend request:', errorData);
+			})
 	};
 
 	$scope.getNewsFeed = function () {

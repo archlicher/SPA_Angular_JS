@@ -79,6 +79,23 @@ div#navbar>form.navbar-left>ul.nav>li#userLi>a#userA>div>img {
 	max-width: 35px;
 }
 
+div#navbar>form.navbar-left>ul.nav>li.dropdown>ul>li>div {
+	padding: 5px;
+	border-bottom: 1px solid green;
+}
+
+div#navbar>form.navbar-left>ul.nav>li.dropdown>ul>li>div>div {
+	padding: 5px;
+}
+
+div#navbar>form.navbar-left>ul.nav>li.dropdown>ul>li>div>div>img {
+	max-width: 30px;
+}
+
+div#navbar>form.navbar-left>ul.nav>li.dropdown>ul>li>div>div>a.link-user {
+	font-size: 80%;
+}
+
 span.error {
 	color: red;
 }
@@ -126,6 +143,8 @@ ul.friends>li.friend>div:hover {
 	cursor: pointer;
 }
 
-div>div.blog-post>div.panel-heading>a>img {
+div>div.blog-post>div.panel-heading>a>img,
+div>div.blog-post>div>div.panel-heading>img,
+div>ul>li>img.find-img-user {
 	max-width:40px;
 }

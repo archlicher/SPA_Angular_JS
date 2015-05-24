@@ -33,11 +33,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
                 headers : this.getHeaders()
             };
             $http(request).success(function () {
-                delete sessionStorage['currentUser'];
-                delete sessionStorage['userData'];
-                delete sessionStorage['myWallData'];
-                delete sessionStorage['friendRequests'];
-                delete sessionStorage['myFriends'];
+                sessionStorage.clear();
                 success();
             }).error(error);
         },
@@ -81,6 +77,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
         },
 
         getMyFriends : function () {
+            delete sessionStorage['myFriends'];
             var request = {
                 method : 'GET',
                 headers : this.getHeaders(),
@@ -92,6 +89,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
         },
 
         getFriendRequest : function (success, error) {
+            delete sessionStorage['friendRequests'];
             var request = {
                 method : 'GET',
                 headers : this.getHeaders(),
@@ -206,8 +204,8 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
         },
 
         hasFriendRequest : function () {
-            var requests = sessionStorage['friendRequests'];
-            if (requests) {
+            var requests = JSON.parse(sessionStorage['friendRequests']);
+            if (requests.length > 0) {
                 return true;
             }
             return false;

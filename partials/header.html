@@ -23,10 +23,21 @@
                     <li>
                         <a href="#/" class="btn btn-default user-btn"><img src="img/news-feed.png" title="news feed" alt="news feed" class="img"></a>
                     </li>
-                    <li>
-                        <a href="" class="btn btn-default user-btn" ng-click="showRequests = true"><img src="img/pending-requests.png" title="pending friend requests" alt="pending requests" class="img"><span class="badge" ng-if="userService.hasFriendRequest()">{{userService.getMyFriendRequests().length}}</span></a>
-                        <ul ng-if="showRequests">
-                            <li><a href="" ng-click="approveRequest()">yes</a><a href="" ng-click="rejectRequest()">no</a></li>
+                    <li class="dropdown">
+                        <a href="" class="btn btn-default user-btn dropdown-toggle" data-toggle="dropdown" role="button" area-expanded="false"><img src="img/pending-requests.png" title="pending friend requests" alt="pending requests" class="img"><span class="badge" ng-if="userService.hasFriendRequest()">{{userService.getMyFriendRequests().length}}</span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="request in userService.getMyFriendRequests()">
+                                <div>
+                                    <div>
+                                        <img ng-src="{{request.user.profileImageData}}" alt="">
+                                        <a href="" class="link-user" ng-click="goToUserWall(request.user.username)">{{request.user.name}}</a>
+                                    </div>
+                                    <div>
+                                        <a href="" class="btn btn-xs btn-info" ng-click="approveRequest(request.id)">approve</a> 
+                                        <a href="" class="btn btn-xs btn-danger" ng-click="rejectRequest(request.id)">reject</a>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -44,9 +55,17 @@
             <form class="navbar-form navbar-right clearfix">
                 <ul class="nav navbar-nav">
                     <li>    
-                        <div class="form-group">
-                            <input type="text" placeholder="Name" class="form-control">
-                            <a type="submit" class="btn btn-success img"><img src="img/search.png" alt="search"></a>
+                        <div class="form-group dropdown">
+                            <input type="text" placeholder="Name" class="form-control dropdown-toggle" data-toggle="dropdown" role="button" area-expanded="false" ng-change="searchForUser(name)" ng-model="name">
+                            <a type="submit" class="btn btn-success img"><img src="img/search.png" alt="search" on-click></a>
+                            <div class="dropdown-menu" role="menu">
+                                <ul>
+                                    <li ng-repeat="user in userService.getFoundUsers()">
+                                        <img class="find-img-user" ng-src="{{user.profileImageData}}" alt="">
+                                        <a href="" class="find-user" ng-click="goToUserWall(user.username)">{{user.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                 </ul>
