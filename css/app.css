@@ -116,10 +116,18 @@ div.container>div.page-header>img#coverPhoto {
 
 div.container>div.page-header>img#profilePhoto,
 div.container>div.page-header>span, 
-div.container>div.page-header>a  {
+div.container>div.page-header>a {
 	margin: 50px 0 0 20px;
 	vertical-align: bottom;
 	font-size: 3em;
+}
+
+body>div>div.container>div.page-header>img#profilePhoto {
+	max-width: 120px;
+}
+
+div.container>div.page-header>a.btn {
+	font-size: 1em;
 }
 
 ul.friends {

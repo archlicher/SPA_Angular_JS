@@ -2,11 +2,11 @@
 	<div class="col-sm-8 blog-main" id="home">
 		<div class="blog-post panel panel-primary" ng-repeat="post in userService.getNewsfeedFromStorage()">
 			<div class="panel-heading">
-				<a ng-click="goToUserWall(post.author.username)" style="color:white; text-decoration:none;">
+				<a ng-click="goToUserWall(post.author.username)" style="color:white; text-decoration:none; cursor:pointer;">
 				<img ng-src="{{post.author.profileImageData}}" alt=""><span><strong> {{post.author.name}} </strong></span></a><span>></span><a href="" ng-click="goToUserWall(post.wallOwner.username)" style="color:white; text-decoration:none;"><span><strong> {{post.wallOwner.name}}</strong></span></a>
 				<span>{{post.date | date}}</span>
-				<a class="btn btn-xs btn-warning" ng-if="post.author.username == userService.getCurrentUser().username">Edit</a>
-				<a ng-if="post.author.username == userService.getCurrentUser().username"  class="btn btn-xs btn-danger">Delete</a>
+				<a class="btn btn-xs btn-warning" ng-if="post.author.username == userService.getCurrentUser().username" style="cursor:pointer;">Edit</a>
+				<a ng-if="post.author.username == userService.getCurrentUser().username"  class="btn btn-xs btn-danger" style="cursor:pointer;">Delete</a>
 			</div>
 			<div class="panel-body">
 				<p>{{post.postContent}}</p>
@@ -18,7 +18,7 @@
 						<button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed">Comment</button>
 						<div ng-if="isCollapsed" style="padding:5px;">
 							<input type="text" ng-model="text">
-							<a class="btn btn-xs btn-info" ng-click="addComment(post.id, text)">Comment</a>
+							<a class="btn btn-xs btn-info" ng-click="addComment(post.id, text)" style="cursor:pointer;">Comment</a>
 						</div>
 					</div>
 				</div>
@@ -26,16 +26,16 @@
 			<div class="panel-info" ng-repeat="comment in post.comments">
 				<div class="panel-heading">
 					<img ng-src="{{comment.author.profileImageData}}" alt="">
-					<a ng-click="goToUserWall(comment.author.username)"><span><strong> {{comment.author.name}} </strong></span></a> commented
+					<a ng-click="goToUserWall(comment.author.username)" style="cursor:pointer;"><span><strong> {{comment.author.name}} </strong></span></a> commented
 					<span>on {{comment.date | date}}</span>
-					<a ng-if="comment.author.username == userService.getCurrentUser().username" class="btn btn-xs btn-warning">Edit</a>
-					<a ng-if="comment.author.username == userService.getCurrentUser().username" class="btn btn-xs btn-danger">Delete</a>
+					<a ng-if="comment.author.username == userService.getCurrentUser().username" class="btn btn-xs btn-warning" style="cursor:pointer;">Edit</a>
+					<a ng-if="comment.author.username == userService.getCurrentUser().username" class="btn btn-xs btn-danger" style="cursor:pointer;">Delete</a>
 				</div>
 				<div class="panel-body">{{comment.commentContent}}</div>
 				<div style="text-align:right; margin: 0 5px 5px 0;">
 					<span> Likes: {{comment.likesCount}} </span>
-					<a href="#/" ng-if="!comment.liked" ng-click="likeComment(comment.id)">Like</a>
-					<a href="#/" ng-if="comment.liked" ng-click="unlikeComment(comment.id)">Unlike</a>
+					<a href="#/" ng-if="!comment.liked" ng-click="likeComment(comment.id)" style="cursor:pointer;">Like</a>
+					<a href="#/" ng-if="comment.liked" ng-click="unlikeComment(comment.id)" style="cursor:pointer;">Unlike</a>
 				</div>
 			</div>
 			</div>

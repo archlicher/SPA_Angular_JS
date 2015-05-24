@@ -14,7 +14,7 @@ SocialNetwork.factory('friendService', function ($http, baseUrl){
             }).error(error);   
         },
 
-        getFriendsDetailFriendsList : function (username, headers, success, error) {
+        getFriendsDetailFriendsList : function (username, headers, error) {
         	var request = {
                 method : 'GET',
                 headers : headers,
@@ -22,7 +22,6 @@ SocialNetwork.factory('friendService', function ($http, baseUrl){
             };
             $http(request).success(function (data) {
                 sessionStorage['friendsList'] = JSON.stringify(data);
-                success(data);
             }).error(error);
         },
 
@@ -36,6 +35,13 @@ SocialNetwork.factory('friendService', function ($http, baseUrl){
                 sessionStorage['friendsPreview'] = JSON.stringify(data);
                 success(data);
             }).error(error);
+        },
+
+        getFriendsFromUserStorage : function () {
+            var friends = sessionStorage['friendsList'];
+            if (friends) {
+                return JSON.parse(sessionStorage['friendsList']);
+            }
         }
 	}
 });

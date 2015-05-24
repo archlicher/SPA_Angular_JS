@@ -131,12 +131,27 @@ SocialNetwork.controller('MainController', function($scope, $route, $location, $
 	$scope.goToUserWall = function (username) {
 		userService.getUserData(username, 
 			function success () {
+				if (userService.getUserFromStorage().isFriend)
+				friendService.getFriendsDetailFriendsList(userService.getUserFromStorage().username, userService.getHeaders(), 
+					function error (errorData) {
+					
+				});				
 				var usernameUrl = userService.getUserFromStorage().username;
 				$location.path('/users/' + usernameUrl);
 			},
 			function error (errorData) {
 				notifyService.showError('Failed to load user:', errorData)
 			})
+	};
+
+	$scope.sendFriendRequest = function (username) {
+		userService.sendFriendRequest(username, 
+			function success () {
+				notifyService.showInfo('Successfully send friend request.');
+			},
+			function error (errorData) {
+				notifyService.showError('Failed to send friend request:', errorData);
+			});
 	};
 
 	$scope.approveRequest = function (requestId) {

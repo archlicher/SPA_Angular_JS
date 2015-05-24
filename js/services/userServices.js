@@ -162,7 +162,7 @@ SocialNetwork.factory('userService', function ($http, baseUrl){
             var request = {
                 method : 'GET',
                 headers : this.getHeaders(),
-                url : baseUrl + username
+                url : baseUrl + 'users/' + username
             };
             $http(request).success(function (data) {
                 sessionStorage['userData'] = JSON.stringify(data);
