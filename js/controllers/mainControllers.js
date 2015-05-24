@@ -1,6 +1,6 @@
 'use strict';
 
-SocialNetwork.controller('MainController', function($scope, $route, $location, $rootScope, userService, friendService, postService, commentService, notifyService) {
+SocialNetwork.controller('MainController', function ($scope, $route, $location, $rootScope, userService, friendService, postService, commentService, notifyService) {
 	$scope.userService = userService;
 	$scope.friendService = friendService;
 	$scope.postService = postService;
